@@ -62,6 +62,19 @@ export default function JoinTeamPage() {
       return;
     }
 
+    // Check semester match
+    const leaderMember = team.members?.find(
+      (m: { student_usn: string }) => m.student_usn === team.leader_usn
+    );
+    const leaderSemester = (leaderMember as { student?: { semester?: number | null } })?.student?.semester;
+    if (user.semester && leaderSemester && user.semester !== leaderSemester) {
+      toast.error(
+        `Cannot join: this team is Semester ${leaderSemester}, but you are Semester ${user.semester}.`
+      );
+      setLoading(false);
+      return;
+    }
+
     // Check cluster constraints
     if (team.project?.constraints && user.branch?.cluster) {
       for (const constraint of team.project.constraints) {

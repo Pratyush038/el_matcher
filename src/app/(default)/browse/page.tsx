@@ -77,7 +77,7 @@ export default function BrowseTeamsPage() {
           `*, cluster:clusters(*), branch:branches(*),
            team:teams(*, leader:students(usn, name, email, phone),
            project:projects(*),
-           members:team_members(*, student:students(usn, name, branch:branches(code, cluster_id))))`
+           members:team_members(*, student:students(usn, name, semester, branch:branches(code, cluster_id))))`
         )
         .eq("is_fulfilled", false)
         .order("created_at", { ascending: false });
@@ -95,6 +95,15 @@ export default function BrowseTeamsPage() {
   }, [supabase]);
 
   const filtered = requirements.filter((req) => {
+    // Semester constraint: only show teams from same semester
+    if (user?.semester) {
+      const leaderMember = req.team?.members?.find(
+        (m) => m.student?.usn === req.team?.leader_usn
+      );
+      const leaderSemester = (leaderMember?.student as { semester?: number | null })?.semester;
+      if (leaderSemester && leaderSemester !== user.semester) return false;
+    }
+
     if (showMyMatches && user) {
       const myBranch = branches.find((b) => b.id === user.branch_id);
       if (!myBranch) return false;

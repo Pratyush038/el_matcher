@@ -80,6 +80,9 @@ export default function LookingForTeamPage() {
   };
 
   const filtered = students.filter((s) => {
+    // Semester constraint: only show students from same semester
+    if (user?.semester && s.semester && s.semester !== user.semester) return false;
+
     if (filterCluster !== "all" && s.branch?.cluster?.id !== filterCluster)
       return false;
     if (filterBranch !== "all") {

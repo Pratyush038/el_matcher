@@ -48,6 +48,7 @@ interface TeamData {
       email: string;
       phone: string | null;
       cgpa: number | null;
+      semester: number | null;
       branch: { name: string; code: string; cluster: { name: string } };
     };
   }[];
@@ -291,6 +292,12 @@ export default function TeamDetailPage() {
               </p>
             </div>
             <div className="flex items-center gap-2">
+              {(() => {
+                const leader = team.members?.find((m) => m.student_usn === team.leader_usn);
+                return leader?.student?.semester ? (
+                  <Badge variant="outline">Sem {leader.student.semester}</Badge>
+                ) : null;
+              })()}
               <Badge variant={team.is_open ? "default" : "destructive"}>
                 {team.is_open ? "Open" : "Closed"}
               </Badge>
@@ -409,6 +416,7 @@ export default function TeamDetailPage() {
                   <p className="text-xs text-muted-foreground mt-0.5">
                     {m.student?.usn} &bull; {m.student?.branch?.name} (
                     {m.student?.branch?.code})
+                    {m.student?.semester && ` \u2022 Sem ${m.student.semester}`}
                   </p>
                   <p className="text-xs text-muted-foreground">
                     {m.student?.email}
