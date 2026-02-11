@@ -259,12 +259,12 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
           </div>
 
           <div className="text-center space-y-2">
-            <h1 className="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-400">
+            <h1 className="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-orange-500 dark:from-amber-400 dark:to-orange-400">
               Verify Email
             </h1>
-            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 max-w-sm">
+            <p className="text-xs sm:text-sm text-muted-foreground max-w-sm">
               A verification code has been sent to{" "}
-              <span className="font-semibold text-zinc-900 dark:text-zinc-200">
+              <span className="font-semibold text-foreground">
                 {verify === "true" ? existEmail : form.getValues("email")}
               </span>
             </p>
@@ -297,21 +297,21 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
               <InputOTPSlot
                 index={0}
                 className={cn(
-                  "rounded-xl h-10 w-10 sm:h-12 sm:w-12 border-zinc-200 dark:border-zinc-700/50 bg-zinc-50 dark:bg-zinc-800/50 transition-all duration-300 text-sm sm:text-base",
+                  "rounded-xl h-10 w-10 sm:h-12 sm:w-12 border-input bg-muted/50 transition-all duration-300 text-sm sm:text-base",
                   inputOptClass,
                 )}
               />
               <InputOTPSlot
                 index={1}
                 className={cn(
-                  "rounded-xl h-10 w-10 sm:h-12 sm:w-12 border-zinc-200 dark:border-zinc-700/50 bg-zinc-50 dark:bg-zinc-800/50 transition-all duration-300 text-sm sm:text-base",
+                  "rounded-xl h-10 w-10 sm:h-12 sm:w-12 border-input bg-muted/50 transition-all duration-300 text-sm sm:text-base",
                   inputOptClass,
                 )}
               />
               <InputOTPSlot
                 index={2}
                 className={cn(
-                  "rounded-xl h-10 w-10 sm:h-12 sm:w-12 border-zinc-200 dark:border-zinc-700/50 bg-zinc-50 dark:bg-zinc-800/50 transition-all duration-300 text-sm sm:text-base",
+                  "rounded-xl h-10 w-10 sm:h-12 sm:w-12 border-input bg-muted/50 transition-all duration-300 text-sm sm:text-base",
                   inputOptClass,
                 )}
               />
@@ -321,28 +321,28 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
               <InputOTPSlot
                 index={3}
                 className={cn(
-                  "rounded-xl h-10 w-10 sm:h-12 sm:w-12 border-zinc-200 dark:border-zinc-700/50 bg-zinc-50 dark:bg-zinc-800/50 transition-all duration-300 text-sm sm:text-base",
+                  "rounded-xl h-10 w-10 sm:h-12 sm:w-12 border-input bg-muted/50 transition-all duration-300 text-sm sm:text-base",
                   inputOptClass,
                 )}
               />
               <InputOTPSlot
                 index={4}
                 className={cn(
-                  "rounded-xl h-10 w-10 sm:h-12 sm:w-12 border-zinc-200 dark:border-zinc-700/50 bg-zinc-50 dark:bg-zinc-800/50 transition-all duration-300 text-sm sm:text-base",
+                  "rounded-xl h-10 w-10 sm:h-12 sm:w-12 border-input bg-muted/50 transition-all duration-300 text-sm sm:text-base",
                   inputOptClass,
                 )}
               />
               <InputOTPSlot
                 index={5}
                 className={cn(
-                  "rounded-xl h-10 w-10 sm:h-12 sm:w-12 border-zinc-200 dark:border-zinc-700/50 bg-zinc-50 dark:bg-zinc-800/50 transition-all duration-300 text-sm sm:text-base",
+                  "rounded-xl h-10 w-10 sm:h-12 sm:w-12 border-input bg-muted/50 transition-all duration-300 text-sm sm:text-base",
                   inputOptClass,
                 )}
               />
             </InputOTPGroup>
           </InputOTP>
 
-          <div className="text-xs sm:text-sm flex gap-2 items-center text-zinc-600 dark:text-zinc-400">
+          <div className="text-xs sm:text-sm flex gap-2 items-center text-muted-foreground">
             <p>Didn&apos;t work?</p>
             <span
               className="text-amber-500 hover:text-amber-600 cursor-pointer hover:underline transition-colors flex items-center gap-2"

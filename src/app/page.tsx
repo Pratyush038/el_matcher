@@ -32,7 +32,7 @@ export default function HomePage() {
           </div>
           <h1 className="text-6xl md:text-7xl font-bold mb-4 leading-[1.1] tracking-tight">
             RVCE{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-300 to-orange-400">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-orange-500 dark:from-amber-300 dark:to-orange-400">
               EL Matcher
             </span>
           </h1>

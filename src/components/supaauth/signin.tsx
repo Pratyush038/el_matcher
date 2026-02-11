@@ -71,7 +71,7 @@ export default function SignIn() {
       <div className="w-full lg:w-1/2 p-4 sm:p-8 lg:p-12">
         <div className="max-w-sm mx-auto space-y-6 lg:space-y-8">
           <div className="text-center space-y-3">
-            <h1 className="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-400">
+            <h1 className="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-orange-500 dark:from-amber-400 dark:to-orange-400">
               Welcome Back
             </h1>
             <p className="text-sm text-muted-foreground">
