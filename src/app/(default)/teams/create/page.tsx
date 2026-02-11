@@ -170,19 +170,19 @@ export default function CreateTeamPage() {
         <Card className="max-w-md w-full text-center">
           <CardContent className="pt-8 pb-8">
             <div className="w-16 h-16 bg-amber-400/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Check className="text-amber-400" size={32} />
+              <Check className="text-amber-600 dark:text-amber-400" size={32} />
             </div>
             <h2 className="text-xl font-bold mb-2">Team Created!</h2>
             <p className="text-muted-foreground mb-6">
               Share this invite code with your teammates:
             </p>
             <div className="flex items-center justify-center gap-3 mb-6">
-              <code className="bg-muted text-amber-400 px-6 py-3 rounded-lg font-mono text-2xl tracking-wider">
+              <code className="bg-muted text-amber-600 dark:text-amber-400 px-6 py-3 rounded-lg font-mono text-2xl tracking-wider">
                 {createdCode}
               </code>
               <Button variant="ghost" size="icon" onClick={copyCode}>
                 {copied ? (
-                  <Check size={20} className="text-amber-400" />
+                  <Check size={20} className="text-amber-600 dark:text-amber-400" />
                 ) : (
                   <Copy size={20} />
                 )}

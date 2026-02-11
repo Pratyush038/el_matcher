@@ -145,12 +145,12 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-medium text-sm text-zinc-700 dark:text-zinc-300">
+                <FormLabel className="font-medium text-sm">
                   Email Address
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className="h-10 sm:h-11 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border-zinc-200 dark:border-zinc-700/50 focus:ring-2 focus:ring-amber-400/20 transition-all duration-300"
+                    className="h-10 sm:h-11 rounded-xl bg-muted/50 border-input focus:ring-2 focus:ring-amber-400/20 transition-all duration-300"
                     placeholder="example@gmail.com"
                     type="email"
                     {...field}
@@ -165,18 +165,18 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-medium text-sm text-zinc-700 dark:text-zinc-300">
+                <FormLabel className="font-medium text-sm">
                   Password
                 </FormLabel>
                 <FormControl>
                   <div className="relative group">
                     <Input
-                      className="h-10 sm:h-11 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border-zinc-200 dark:border-zinc-700/50 focus:ring-2 focus:ring-amber-400/20 transition-all duration-300 pr-10"
+                      className="h-10 sm:h-11 rounded-xl bg-muted/50 border-input focus:ring-2 focus:ring-amber-400/20 transition-all duration-300 pr-10"
                       type={passwordReveal ? "text" : "password"}
                       {...field}
                     />
                     <div
-                      className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-muted-foreground hover:text-foreground transition-colors"
                       onClick={() => setPasswordReveal(!passwordReveal)}
                     >
                       {passwordReveal ? (
@@ -196,18 +196,18 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
             name="confirm-pass"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-medium text-sm text-zinc-700 dark:text-zinc-300">
+                <FormLabel className="font-medium text-sm">
                   Confirm Password
                 </FormLabel>
                 <FormControl>
                   <div className="relative group">
                     <Input
-                      className="h-10 sm:h-11 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border-zinc-200 dark:border-zinc-700/50 focus:ring-2 focus:ring-amber-400/20 transition-all duration-300 pr-10"
+                      className="h-10 sm:h-11 rounded-xl bg-muted/50 border-input focus:ring-2 focus:ring-amber-400/20 transition-all duration-300 pr-10"
                       type={passwordReveal ? "text" : "password"}
                       {...field}
                     />
                     <div
-                      className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-muted-foreground hover:text-foreground transition-colors"
                       onClick={() => setPasswordReveal(!passwordReveal)}
                     >
                       {passwordReveal ? (
@@ -232,7 +232,7 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
             Continue
             <RiArrowRightSFill className="w-5 h-5" />
           </Button>
-          <div className="text-center text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+          <div className="text-center text-xs sm:text-sm text-muted-foreground">
             <h1>
               Already have account?{" "}
               <Link
@@ -255,7 +255,7 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
       >
         <div className="flex min-h-[400px] items-center justify-center flex-col space-y-6 p-4 sm:p-8">
           <div className="bg-amber-400/10 dark:bg-amber-400/5 p-4 rounded-full">
-            <SiMinutemailer className="w-6 h-6 sm:w-8 sm:h-8 text-amber-400" />
+            <SiMinutemailer className="w-6 h-6 sm:w-8 sm:h-8 text-amber-600 dark:text-amber-400" />
           </div>
 
           <div className="text-center space-y-2">

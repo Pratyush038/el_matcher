@@ -43,7 +43,7 @@ export default function SignIn() {
   const next = urlParams.get("next");
   
   return (
-    <div className="flex min-h-[550px] w-[min(100%,24rem)] sm:w-full max-w-6xl mx-auto rounded-2xl overflow-hidden shadow-2xl bg-white dark:bg-zinc-900 flex-col lg:flex-row">
+    <div className="flex min-h-[550px] w-[min(100%,24rem)] sm:w-full max-w-6xl mx-auto rounded-2xl overflow-hidden shadow-2xl bg-card flex-col lg:flex-row">
       {/* Left Panel - Decorative */}
       <div className="lg:w-1/2 bg-gradient-to-br from-amber-500 to-orange-400 p-4 sm:p-8 lg:p-12 flex flex-col justify-between relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20"></div>
@@ -74,7 +74,7 @@ export default function SignIn() {
             <h1 className="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-400">
               Welcome Back
             </h1>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">
+            <p className="text-sm text-muted-foreground">
               Sign in to continue to {appName}
             </p>
           </div>
@@ -82,9 +82,9 @@ export default function SignIn() {
           <Social redirectTo={next || "/"} />
 
           <div className="flex items-center gap-4">
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-zinc-300 dark:via-zinc-700 to-transparent"></div>
-            <div className="text-sm text-zinc-500 dark:text-zinc-400 font-medium">or</div>
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-zinc-300 dark:via-zinc-700 to-transparent"></div>
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+            <div className="text-sm text-muted-foreground font-medium">or</div>
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
           </div>
 
           <SignInForm redirectTo={next || "/"} />
@@ -133,12 +133,12 @@ export function SignInForm({ redirectTo }: { redirectTo: string }) {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-medium text-sm text-zinc-700 dark:text-zinc-300">
+              <FormLabel className="font-medium text-sm">
                 Email Address
               </FormLabel>
               <FormControl>
                 <Input
-                  className="h-10 sm:h-11 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border-zinc-200 dark:border-zinc-700/50 focus:ring-2 focus:ring-amber-400/20 transition-all duration-300"
+                  className="h-10 sm:h-11 rounded-xl bg-muted/50 border-input focus:ring-2 focus:ring-amber-400/20 transition-all duration-300"
                   placeholder="example@gmail.com"
                   type="email"
                   {...field}
@@ -153,18 +153,18 @@ export function SignInForm({ redirectTo }: { redirectTo: string }) {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-medium text-sm text-zinc-700 dark:text-zinc-300">
+              <FormLabel className="font-medium text-sm">
                 Password
               </FormLabel>
               <FormControl>
                 <div className="relative group">
                   <Input
-                    className="h-10 sm:h-11 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border-zinc-200 dark:border-zinc-700/50 focus:ring-2 focus:ring-amber-400/20 transition-all duration-300 pr-10"
+                    className="h-10 sm:h-11 rounded-xl bg-muted/50 border-input focus:ring-2 focus:ring-amber-400/20 transition-all duration-300 pr-10"
                     type={passwordReveal ? "text" : "password"}
                     {...field}
                   />
                   <div
-                    className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-muted-foreground hover:text-foreground transition-colors"
                     onClick={() => setPasswordReveal(!passwordReveal)}
                   >
                     {passwordReveal ? (
@@ -188,7 +188,7 @@ export function SignInForm({ redirectTo }: { redirectTo: string }) {
           />
           Sign In
         </Button>
-        <div className="text-center text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+        <div className="text-center text-xs sm:text-sm text-muted-foreground">
           <h1>
             Don&apos;t have an account yet?{" "}
             <Link

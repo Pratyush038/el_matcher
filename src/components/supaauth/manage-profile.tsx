@@ -39,7 +39,7 @@ export default function ManageProfile() {
         <div className=" w-60 h-[100%] rounded-s-lg p-5 space-y-7 ">
           <div>
             <h1 className="text-2xl font-bold">Account</h1>
-            <p className="text-sm dark:text-gray-300 ">
+            <p className="text-sm text-gray-600 dark:text-gray-300 ">
               Manage your account info.
             </p>
           </div>
@@ -79,7 +79,7 @@ export default function ManageProfile() {
               <div className="flex items-center gap-2 px-3">
                 <AuthProviderIcon />
                 <p className="capitalize">{data?.app_metadata.provider}</p>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-muted-foreground">
                   {data?.user_metadata.user_name}
                 </p>
               </div>

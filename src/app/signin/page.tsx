@@ -76,8 +76,6 @@ export default function SignInPage() {
           speed={0.5}
           squareSize={40}
           direction="diagonal"
-          borderColor="#3a2a1a"
-          hoverFillColor="#1a1a1a"
         />
       </div>
       <Card className="relative z-10 w-full max-w-md">

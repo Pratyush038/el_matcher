@@ -5,6 +5,7 @@ import { ArrowRight, Users, Shield, Target, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Squares from "@/components/ui/squares-background";
+import { ModeToggle } from "@/components/global/theme-switcher";
 
 export default function HomePage() {
   return (
@@ -14,15 +15,18 @@ export default function HomePage() {
           speed={0.5}
           squareSize={40}
           direction="diagonal"
-          borderColor="#3a2a1a"
-          hoverFillColor="#1a1a1a"
         />
       </div>
 
       <div className="relative z-10">
+        {/* Theme Toggle */}
+        <div className="absolute top-4 right-4">
+          <ModeToggle />
+        </div>
+
         {/* Hero */}
         <div className="max-w-4xl mx-auto px-4 pt-32 pb-24 text-center">
-          <div className="inline-flex items-center gap-2 bg-amber-300/10 border border-amber-300/20 text-amber-300 text-sm font-medium px-5 py-2 rounded-full mb-8 tracking-wide">
+          <div className="inline-flex items-center gap-2 bg-amber-300/10 border border-amber-300/20 text-amber-700 dark:text-amber-300 text-sm font-medium px-5 py-2 rounded-full mb-8 tracking-wide">
             <Users size={16} />
             RVCE EL Team Matchmaking
           </div>
@@ -56,7 +60,7 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-6">
             <Card className="bg-card/50 backdrop-blur-sm">
               <CardContent className="pt-6">
-                <Zap className="text-amber-300 mb-3" size={28} />
+                <Zap className="text-amber-600 dark:text-amber-300 mb-3" size={28} />
                 <h3 className="font-semibold text-lg mb-1 tracking-tight">Invite Codes</h3>
                 <p className="text-sm text-muted-foreground">
                   Create a team, get a code, share it. Friends join instantly.
@@ -65,7 +69,7 @@ export default function HomePage() {
             </Card>
             <Card className="bg-card/50 backdrop-blur-sm">
               <CardContent className="pt-6">
-                <Shield className="text-amber-400 mb-3" size={28} />
+                <Shield className="text-amber-600 dark:text-amber-400 mb-3" size={28} />
                 <h3 className="font-semibold text-lg mb-1 tracking-tight">Cluster Constraints</h3>
                 <p className="text-sm text-muted-foreground">
                   Set limits per cluster. The system enforces them automatically.
@@ -74,7 +78,7 @@ export default function HomePage() {
             </Card>
             <Card className="bg-card/50 backdrop-blur-sm">
               <CardContent className="pt-6">
-                <Target className="text-orange-300 mb-3" size={28} />
+                <Target className="text-orange-600 dark:text-orange-300 mb-3" size={28} />
                 <h3 className="font-semibold text-lg mb-1 tracking-tight">Browse &amp; Match</h3>
                 <p className="text-sm text-muted-foreground">
                   Post what your team needs. Find teams looking for your branch.

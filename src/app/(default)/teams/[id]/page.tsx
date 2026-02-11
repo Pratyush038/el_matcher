@@ -314,7 +314,7 @@ export default function TeamDetailPage() {
               <span className="text-sm text-muted-foreground">
                 Invite Code:
               </span>
-              <code className="bg-muted text-amber-400 px-3 py-1 rounded font-mono">
+              <code className="bg-muted text-amber-600 dark:text-amber-400 px-3 py-1 rounded font-mono">
                 {team.invite_code}
               </code>
               <Button
@@ -324,7 +324,7 @@ export default function TeamDetailPage() {
                 onClick={copyCode}
               >
                 {copied ? (
-                  <Check size={14} className="text-amber-400" />
+                  <Check size={14} className="text-amber-600 dark:text-amber-400" />
                 ) : (
                   <Copy size={14} />
                 )}
@@ -565,7 +565,7 @@ export default function TeamDetailPage() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="text-amber-400 h-7"
+                        className="text-amber-600 dark:text-amber-400 h-7"
                         onClick={() => fulfillRequirement(req.id)}
                       >
                         Filled

@@ -11,12 +11,20 @@ interface SquaresProps {
   className?: string;
 }
 
+function getCssVariableColor(varName: string, fallback: string): string {
+  if (typeof window === "undefined") return fallback;
+  const value = getComputedStyle(document.documentElement)
+    .getPropertyValue(varName)
+    .trim();
+  return value || fallback;
+}
+
 export default function Squares({
   direction = "diagonal",
   speed = 0.5,
-  borderColor = "#271E37",
+  borderColor,
   squareSize = 40,
-  hoverFillColor = "#222222",
+  hoverFillColor,
   className = "",
 }: SquaresProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -25,12 +33,33 @@ export default function Squares({
   const numSquaresY = useRef(0);
   const gridOffset = useRef({ x: 0, y: 0 });
   const hoveredSquare = useRef<{ x: number; y: number } | null>(null);
+  const resolvedBorderColor = useRef(borderColor || "#e5e5e5");
+  const resolvedHoverColor = useRef(hoverFillColor || "#f5f5f5");
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    const resolveColors = () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      resolvedBorderColor.current =
+        borderColor || (isDark ? "#3a2a1a" : "#e5e1d8");
+      resolvedHoverColor.current =
+        hoverFillColor || (isDark ? "#1a1a1a" : "#faf8f5");
+    };
+
+    resolveColors();
+
+    // Watch for theme changes
+    const observer = new MutationObserver(() => {
+      resolveColors();
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
 
     const resizeCanvas = () => {
       canvas.width = canvas.offsetWidth;
@@ -61,11 +90,11 @@ export default function Squares({
               hoveredSquare.current.x &&
             Math.floor((y - startY) / squareSize) === hoveredSquare.current.y
           ) {
-            ctx.fillStyle = hoverFillColor;
+            ctx.fillStyle = resolvedHoverColor.current;
             ctx.fillRect(squareX, squareY, squareSize, squareSize);
           }
 
-          ctx.strokeStyle = borderColor;
+          ctx.strokeStyle = resolvedBorderColor.current;
           ctx.strokeRect(squareX, squareY, squareSize, squareSize);
         }
       }
@@ -157,6 +186,7 @@ export default function Squares({
       cancelAnimationFrame(requestRef.current);
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseleave", handleMouseLeave);
+      observer.disconnect();
     };
   }, [direction, speed, borderColor, hoverFillColor, squareSize]);
 

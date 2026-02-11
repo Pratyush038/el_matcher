@@ -143,13 +143,13 @@ export default function DashboardPage() {
           <Link href="/teams/join">
             <Card className="hover:border-green-500/50 transition-colors cursor-pointer group h-full">
               <CardContent className="pt-6">
-                <KeyRound className="text-amber-400 mb-3" size={28} />
+                <KeyRound className="text-amber-600 dark:text-amber-400 mb-3" size={28} />
                 <h3 className="font-semibold mb-1">Join with Code</h3>
                 <p className="text-sm text-muted-foreground">
                   Enter an invite code to join a friend&apos;s team
                 </p>
                 <ArrowRight
-                  className="text-muted-foreground/40 group-hover:text-amber-400 mt-3 transition-colors"
+                  className="text-muted-foreground/40 group-hover:text-amber-600 dark:group-hover:text-amber-400 mt-3 transition-colors"
                   size={18}
                 />
               </CardContent>
@@ -194,7 +194,7 @@ export default function DashboardPage() {
                       <span className="text-xs text-muted-foreground">
                         Invite:
                       </span>
-                      <code className="bg-muted text-amber-400 px-3 py-1 rounded font-mono text-sm">
+                      <code className="bg-muted text-amber-600 dark:text-amber-400 px-3 py-1 rounded font-mono text-sm">
                         {team.invite_code}
                       </code>
                       <Button
@@ -204,7 +204,7 @@ export default function DashboardPage() {
                         onClick={() => copyCode(team.invite_code)}
                       >
                         {copiedCode === team.invite_code ? (
-                          <Check size={14} className="text-amber-400" />
+                          <Check size={14} className="text-amber-600 dark:text-amber-400" />
                         ) : (
                           <Copy size={14} />
                         )}
