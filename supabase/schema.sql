@@ -139,6 +139,9 @@ CREATE POLICY "Authenticated can create teams" ON teams FOR INSERT WITH CHECK (a
 CREATE POLICY "Leader can update team" ON teams FOR UPDATE USING (
   leader_usn IN (SELECT usn FROM students WHERE auth_id = auth.uid())
 );
+CREATE POLICY "Leader can delete team" ON teams FOR DELETE USING (
+  leader_usn IN (SELECT usn FROM students WHERE auth_id = auth.uid())
+);
 
 -- Team members: read all, team leader or self can manage
 CREATE POLICY "Anyone can read team members" ON team_members FOR SELECT USING (true);

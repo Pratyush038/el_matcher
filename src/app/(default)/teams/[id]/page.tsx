@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { createSupabaseBrowser } from "@/lib/supabase/client";
 import { useAuth, useBranches } from "@/lib/hooks";
-import { useParams } from "next/navigation";
-import { Copy, Check, Users, Plus, Trash2 } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
+import { Copy, Check, Users, Plus, Trash2, LogOut } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -69,6 +69,7 @@ export default function TeamDetailPage() {
   const { user } = useAuth();
   const { clusters, branches } = useBranches();
   const supabase = createSupabaseBrowser();
+  const router = useRouter();
 
   const [team, setTeam] = useState<TeamData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -102,6 +103,7 @@ export default function TeamDetailPage() {
   }, [teamId]);
 
   const isLeader = user?.usn === team?.leader_usn;
+  const isMember = team?.members?.some((m) => m.student_usn === user?.usn) ?? false;
 
   const copyCode = () => {
     if (team) {
@@ -130,6 +132,74 @@ export default function TeamDetailPage() {
       .eq("student_usn", memberUsn);
     toast.success("Member removed");
     fetchTeam();
+  };
+
+  const leaveTeam = async () => {
+    if (!team || !user) return;
+
+    if (isLeader) {
+      const otherMembers = team.members?.filter(
+        (m) => m.student_usn !== user.usn
+      );
+      if (otherMembers && otherMembers.length > 0) {
+        // Transfer leadership to next member
+        const { error: transferErr } = await supabase
+          .from("teams")
+          .update({ leader_usn: otherMembers[0].student_usn })
+          .eq("id", team.id);
+        if (transferErr) {
+          toast.error("Failed to transfer leadership: " + transferErr.message);
+          return;
+        }
+        // Remove self from team
+        const { error } = await supabase
+          .from("team_members")
+          .delete()
+          .eq("team_id", team.id)
+          .eq("student_usn", user.usn);
+        if (error) {
+          toast.error(error.message);
+          return;
+        }
+      } else {
+        // Last member — delete the team (cascades to members & requirements)
+        const { error } = await supabase
+          .from("teams")
+          .delete()
+          .eq("id", team.id);
+        if (error) {
+          toast.error(error.message);
+          return;
+        }
+      }
+    } else {
+      const { error } = await supabase
+        .from("team_members")
+        .delete()
+        .eq("team_id", team.id)
+        .eq("student_usn", user.usn);
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+    }
+
+    toast.success("You have left the team.");
+    router.push("/dashboard");
+  };
+
+  const deleteTeam = async () => {
+    if (!team || !isLeader) return;
+    const { error } = await supabase
+      .from("teams")
+      .delete()
+      .eq("id", team.id);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    toast.success("Team deleted.");
+    router.push("/dashboard");
   };
 
   const addRequirement = async () => {
@@ -257,6 +327,28 @@ export default function TeamDetailPage() {
               <Users size={14} />
               {team.members?.length || 0} / {team.project?.max_team_size}{" "}
               members
+            </div>
+            <div className="flex items-center gap-2 ml-auto">
+              {isMember && (
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  onClick={leaveTeam}
+                >
+                  <LogOut size={14} className="mr-1" />
+                  Leave Team
+                </Button>
+              )}
+              {isLeader && (
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  onClick={deleteTeam}
+                >
+                  <Trash2 size={14} className="mr-1" />
+                  Delete Team
+                </Button>
+              )}
             </div>
           </div>
 

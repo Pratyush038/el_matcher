@@ -16,14 +16,17 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import useUser from "@/hooks/use-user";
 import ManageProfile from "./manage-profile";
 import Avatar from "./avatar";
+import { useQueryClient } from "@tanstack/react-query";
 export default function UserProfile() {
   const [isSignOut, startSignOut] = useTransition();
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { data } = useUser();
   const signout = () => {
     startSignOut(async () => {
       const supabase = createSupabaseBrowser();
       await supabase.auth.signOut();
+      queryClient.clear();
       router.push("/signin");
     });
   };

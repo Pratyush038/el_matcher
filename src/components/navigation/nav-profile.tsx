@@ -18,14 +18,17 @@ import {
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import { createSupabaseBrowser } from "@/lib/supabase/client";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function NavProfile({ user }: { user: { email?: string; user_metadata?: { display_name?: string } } }) {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const [isSignOut, startSignOut] = useTransition();
   const signout = () => {
     startSignOut(async () => {
       const supabase = createSupabaseBrowser();
       await supabase.auth.signOut();
+      queryClient.clear();
       router.push("/signin");
     });
   };
